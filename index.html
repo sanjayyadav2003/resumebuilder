@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resume Gnereator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+<div class="container" id="cv-form">
+    <h1 class="text-center my-2">Resume Generator</h1>
+    <p class="text-center">By Sanjay Yadav</p>
+
+    <div class="row my-4">
+        <div class="col-md-6">
+           <h3>Personal Details</h3>
+           <div class="form-group my-4">
+              <label for="nameField">Your Name</label>
+              <input type="text" id="nameField" class="form-control" placeholder="Enter Your Name">
+           </div>
+           <div class="form-group my-4">
+            <label for="contactField">Your Contact Number</label>
+            <input type="text" id="contactField" class="form-control" placeholder="Enter Your Contact">
+         </div>
+         <div class="form-group">
+            <label for="nameField">Your Address</label>
+            <textarea type="text" id="addressField" class="form-control" placeholder="Address" rows="4"></textarea>
+         </div>
+         <p class="text-secondary my-4">Important Links</p>
+         <div class="form-group my-4">
+            <label for="nameField">Linkedin Link</label>
+            <input type="text" id="linkedinField" class="form-control" placeholder="Paste URL">
+         </div>
+         <div class="form-group my-4">
+            <label for="nameField">Github Link</label>
+            <input type="text" id="githubField" class="form-control" placeholder="Paste URL">
+         </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Professional Details</h3>
+            <div class="form-group my-4">
+                <label for="">Objective</label>
+                <textarea id="objectiveField"  class="form-control weField" placeholder="Add here"></textarea>
+             </div>
+             <div class="form-group mt-2" id="we">
+                <label for="">Work Experience</label>
+                <textarea class="form-control weField" placeholder="Add here" rows="3"></textarea>
+
+                <div class="container text-center mt-2" id="weAddButton">
+                    <button onclick="addNewWEField()" class="btn btn-primary btn-sm">Add</button>
+                </div>
+             </div>
+             <div class="form-group" id="aqAddButton">
+                <label for="">Academic Qualification</label>
+                <textarea type="text"  class="form-control aqField" placeholder="Add here"></textarea>
+             </div>
+             <div class="form-group" id="ProjectAdd">
+                <label for="">Projects</label>
+                <textarea type="text"  class="form-control aqField" placeholder="Add here"></textarea>
+             </div>
+        </div>
+       <div class="container text-center">
+             <button onclick="generateCV()" class="btn btn-primary btn-lg">Generate CV </button>
+       </div>
+   </div>
+</div>
+   <div class="container" id="cv-template">
+      <div class="row">
+        <div class="col-md-4 text-center py-5 background">
+            <img src="data:image/png;base64,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" 
+            alt=""
+            class="img-fluid my-img"
+            />
+            <div class="container">
+                <p id="nameT1">Sanjay Yadav</p>
+                <p id="contactT">7011106878,23122344</p>
+                <p id="addressT">Lorem ipsum dolor sit amet.</p>
+            </div>
+            <hr />
+
+            <p>
+                <a id="linT" href="www.linked">Linkedin</a>
+            </p>
+            <p>
+                <a id="gitT" href="github">Github</a>
+            </p>
+        </div>
+        <div class="col-md-8">
+            <h1 id="nameT2" class="text-center" style="font-weight: 980;">
+                Sanjay Yadav
+            </h1>
+            <div class="card mt-4">
+                <div class="card-header rightbackground">
+                    <h3>Objective</h3>
+                </div>
+                <div class="card-body">
+                    <p id="objectiveT">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi aut totam at consequatur, laboriosam qui alias nisi incidunt atque fuga.</p>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="card-header rightbackground">
+                    <h3>Work Experience</h3>
+                </div>
+                <div class="card-body">
+                    <ul id="weT">
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="card-header rightbackground">
+                    <h3>Academic Qualification</h3>
+                </div>
+                <div class="card-body">
+                    <ul id="aqT">
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="card-header rightbackground">
+                    <h3>Projects</h3>
+                </div>
+                <div class="card-body">
+                    <ul id="projectT">
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container mt-3 text-center">
+                <button onclick="printCV()" class="btn rightbackground">Print CV</button>
+            </div>
+        </div>
+      </div>
+   </div>
+     
+   
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
